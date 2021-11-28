@@ -34,9 +34,9 @@ export default function Result(props) {
               >
                 <div
                   className="card mb-4 shadow-sm"
-                  style={{ overflow: "hidden" }}
+                  style={{ overflow: "scroll" }}
                 >
-                  <div className="hstack gap-5">
+                  <div className="hstack gap-2">
                     <img
                       src={item.albumArt}
                       alt="Album art"
