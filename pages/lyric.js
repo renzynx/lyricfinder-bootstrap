@@ -15,11 +15,7 @@ export default function Lyric(props) {
       </div>
     );
 
-  const parsed = props.data.lyrics.split("\n").map((str, e) => (
-    <p key={e} style={{ color: "white" }}>
-      {str}
-    </p>
-  ));
+  const lyric = props.data.lyrics;
 
   return (
     <>
@@ -62,7 +58,7 @@ export default function Lyric(props) {
         <h4 className="mb-4 " style={{ color: "white" }}>
           {props.data.title}
         </h4>
-        {parsed}
+        <p style={{ color: "white", whiteSpace: "pre-line" }}>{lyric}</p>
       </div>
     </>
   );
