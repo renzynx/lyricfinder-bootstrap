@@ -8,7 +8,7 @@ export const Tracks = ({ track }) => {
         href={`/lyric?name=${track.track_name}&artist=${track.artist_name}`}
         passHref={true}
       >
-        <div className="card mb-4 shadow-sm ">
+        <div className="card mb-4 shadow-sm">
           <div className="card-body">
             <h5>{track.artist_name}</h5>
             <p className="card-text">

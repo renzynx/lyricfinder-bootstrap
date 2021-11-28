@@ -79,9 +79,12 @@ export async function getServerSideProps({ query }) {
   });
 
   const ytRes = await YouTube.searchOne(`${name} ${artist}`);
-  const embedLink = `https://www.youtube.com/embed/${ytRes.id}?rel=0`;
 
   return {
-    props: { data: payload, embed: embedLink, title: ytRes.title },
+    props: {
+      data: payload,
+      embed: `https://www.youtube.com/embed/${ytRes.id}?rel=0`,
+      title: ytRes.title,
+    },
   };
 }

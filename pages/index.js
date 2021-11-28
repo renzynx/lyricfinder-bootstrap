@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { Navbar } from "../components/Navbar";
 import { Tracks } from "../components/Tracks";
-import { getAlbumArt } from "gnus_xyz";
 
 export default function Home({ track_list }) {
   return (

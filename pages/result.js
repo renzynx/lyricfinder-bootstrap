@@ -1,4 +1,3 @@
-import { searchSong } from "gnus_xyz";
 import { Navbar } from "../components/Navbar";
 import style from "../styles/Track.module.css";
 import Link from "next/link";
