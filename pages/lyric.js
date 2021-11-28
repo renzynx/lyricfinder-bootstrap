@@ -80,10 +80,14 @@ export async function getServerSideProps({ query }) {
   if (query.id) {
     payload = await getSongByID(query.id, process.env.LYRIC);
 
+    const ytResID = await YouTube.searchOne(q);
+    const embedLinkID = `https://www.youtube.com/embed/${ytResID.id}?rel=0`;
+
     return {
       props: {
         data: payload,
-        query: q,
+        embed: embedLinkID,
+        title: ytResID.title,
       },
     };
   }
