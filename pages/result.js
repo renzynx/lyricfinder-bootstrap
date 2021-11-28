@@ -41,8 +41,8 @@ export default function Result(props) {
                       src={item.albumArt}
                       alt="Album art"
                       style={{
-                        maxHeight: "100px",
-                        maxWidth: "100px",
+                        maxHeight: "120px",
+                        maxWidth: "120px",
                       }}
                     />
                     <div className="card-body">
