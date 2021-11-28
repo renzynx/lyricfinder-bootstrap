@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { Navbar } from "../components/Navbar";
 import { Tracks } from "../components/Tracks";
+import { getAlbumArt } from "gnus_xyz";
 
 export default function Home({ track_list }) {
   return (
@@ -27,14 +28,16 @@ export default function Home({ track_list }) {
     </>
   );
 }
-//row justify-content-md-center
+
 export async function getStaticProps() {
   const res = await fetch(
     `${process.env.URL}chart.tracks.get?chart_name=top&page=1&page_size=10&country=us&f_has_lyrics=1&apikey=${process.env.KEY}`
   );
   const data = await res.json();
 
+  const tracks = data.message.body.track_list;
+
   return {
-    props: { track_list: data.message.body.track_list },
+    props: { track_list: tracks },
   };
 }

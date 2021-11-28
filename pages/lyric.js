@@ -1,7 +1,6 @@
 import Head from "next/head";
 import YouTube from "youtube-sr";
 import { getSong } from "gnus_xyz";
-import { getSongByID } from "../utils/getSongById";
 import { Navbar } from "../components/Navbar";
 
 export default function Lyric(props) {
@@ -65,37 +64,21 @@ export default function Lyric(props) {
 }
 
 export async function getServerSideProps({ query }) {
-  const { q } = query;
+  const { name, artist } = query;
 
-  if (!q) {
-    if (window) return (window.location.href = "https://lyricfinder.xyz/");
-  }
-
-  let payload;
-
-  if (query.id) {
-    payload = await getSongByID(query.id, process.env.LYRIC);
-
-    const ytResID = await YouTube.searchOne(q);
-    const embedLinkID = `https://www.youtube.com/embed/${ytResID.id}?rel=0`;
-
+  if (!name || !artist)
     return {
-      props: {
-        data: payload,
-        embed: embedLinkID,
-        title: ytResID.title,
-      },
+      notFound: true,
     };
-  }
 
-  payload = await getSong({
+  const payload = await getSong({
     apiKey: process.env.LYRIC,
-    title: q,
-    artist: " ",
+    title: name,
+    artist: artist,
     optimizeQuery: true,
   });
 
-  const ytRes = await YouTube.searchOne(q);
+  const ytRes = await YouTube.searchOne(`${name} ${artist}`);
   const embedLink = `https://www.youtube.com/embed/${ytRes.id}?rel=0`;
 
   return {

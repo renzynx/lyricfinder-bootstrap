@@ -5,7 +5,7 @@ export const Tracks = ({ track }) => {
   return (
     <div className={style.bruh}>
       <Link
-        href={`/lyric?q=${track.track_name} ${track.artist_name}`}
+        href={`/lyric?name=${track.track_name}&artist=${track.artist_name}`}
         passHref={true}
       >
         <div className="card mb-4 shadow-sm ">

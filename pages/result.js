@@ -26,28 +26,24 @@ export default function Result(props) {
         style={{ maxWidth: "90%" }}
       >
         {props.data.map((item, index) => {
+          const {
+            track: { track_name, artist_name, album_name },
+          } = item;
+
           return (
             <div className={style.bruh} key={index}>
               <Link
-                href={`/lyric?q=${item.title}&id=${item.id}`}
+                href={`/lyric?name=${track_name}&artist=${artist_name}`}
                 passHref={true}
               >
-                <div
-                  className="card mb-4 shadow-sm"
-                  style={{ overflow: "scroll" }}
-                >
-                  <div className="hstack gap-2">
-                    <img
-                      src={item.albumArt}
-                      alt="Album art"
-                      style={{
-                        maxHeight: "120px",
-                        maxWidth: "120px",
-                      }}
-                    />
-                    <div className="card-body">
-                      <h5>{item.title}</h5>
-                    </div>
+                <div className="card mb-4 shadow-sm ">
+                  <div className="card-body">
+                    <h5>{artist_name}</h5>
+                    <p className="card-text">
+                      <strong>Track</strong>: {track_name}
+                      <br />
+                      <strong>Album</strong>: {album_name}
+                    </p>
                   </div>
                 </div>
               </Link>
@@ -64,18 +60,21 @@ export async function getServerSideProps({ query }) {
 
   if (!q) {
     if (window) return (window.location.href = "https://lyricfinder.xyz/");
+
+    return;
   }
 
-  const payload = await searchSong({
-    apiKey: process.env.LYRIC,
-    title: q,
-    artist: " ",
-    optimizeQuery: true,
-  });
+  const res = await fetch(
+    `${process.env.URL}track.search?q_track=${q}&apikey=${process.env.KEY}&page=1&page_size=10&s_track_rating=desc`
+  );
+
+  const data = await res.json();
+
+  const { track_list } = data.message.body;
 
   return {
     props: {
-      data: payload,
+      data: track_list,
       query: q,
     },
   };
