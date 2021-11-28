@@ -1,4 +1,5 @@
 import Head from "next/head";
+import YouTube from "youtube-sr";
 import { getSong } from "gnus_xyz";
 import { getSongByID } from "../utils/getSongById";
 import { Navbar } from "../components/Navbar";
@@ -6,7 +7,10 @@ import { Navbar } from "../components/Navbar";
 export default function Lyric(props) {
   if (!props?.data)
     return (
-      <div className="spinner-border text-primary" role="status">
+      <div
+        className="spinner-border text-primary mx-auto my-20px"
+        role="status"
+      >
         <span className="visually-hidden">Loading...</span>
       </div>
     );
@@ -23,7 +27,26 @@ export default function Lyric(props) {
         <title>{props.data.title}</title>
       </Head>
       <Navbar />
-      <div className="text-center mb-5">
+      <div className="vstack text-center mb-5">
+        <button
+          className="btn btn-outline-danger mx-auto mb-4"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#playerCollapse"
+          aria-expanded="false"
+          aria-controls="playerCollapse"
+        >
+          Music Video
+        </button>
+        <div className="collapse mb-4" id="playerCollapse">
+          <div className="ratio ratio-16x9 mx-auto" style={{ width: "70%" }}>
+            <iframe
+              src={props.embed}
+              title={props.title}
+              allowFullScreen
+            ></iframe>
+          </div>
+        </div>
         <img
           src={props.data.albumArt}
           className="img-thumbnail"
@@ -72,7 +95,10 @@ export async function getServerSideProps({ query }) {
     optimizeQuery: true,
   });
 
+  const ytRes = await YouTube.searchOne(q);
+  const embedLink = `https://www.youtube.com/embed/${ytRes.id}?rel=0`;
+
   return {
-    props: { data: payload },
+    props: { data: payload, embed: embedLink, title: ytRes.title },
   };
 }

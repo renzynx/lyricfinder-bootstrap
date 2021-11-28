@@ -17,7 +17,7 @@ export const Navbar = () => {
         style={{ marginBottom: "10vh" }}
       >
         <div className="container-fluid">
-          <a className="navbar-brand" href="/" passHref={true}>
+          <a className="navbar-brand" href="/">
             lyricfinder
           </a>
           <button
@@ -57,7 +57,7 @@ export const Navbar = () => {
                 value={value}
               />
               <Link href={value ? `/result?q=${value}` : "/"} passHref={true}>
-                <button className="btn btn-outline-info" type="submit">
+                <button className="btn btn-outline-danger" type="submit">
                   Search
                 </button>
               </Link>

@@ -7,7 +7,10 @@ import Head from "next/head";
 export default function Result(props) {
   if (!props?.data)
     return (
-      <div className="spinner-border text-primary" role="status">
+      <div
+        className="spinner-border text-primary mx-auto my-20px"
+        role="status"
+      >
         <span className="visually-hidden">Loading...</span>
       </div>
     );
