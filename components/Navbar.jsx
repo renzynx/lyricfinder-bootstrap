@@ -14,7 +14,7 @@ export const Navbar = () => {
     <>
       <nav
         className="navbar navbar-expand-lg navbar-dark bg-dark"
-        style={{ marginBottom: "10vh" }}
+        style={{ marginBottom: "5vh" }}
       >
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
