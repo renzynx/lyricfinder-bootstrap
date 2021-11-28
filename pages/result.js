@@ -21,7 +21,10 @@ export default function Result(props) {
         <title>Result for {props.query}</title>
       </Head>
       <Navbar />
-      <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2">
+      <div
+        className="row row-cols-1 row-cols-sm-1 row-cols-md-2 mx-auto"
+        style={{ maxWidth: "90%" }}
+      >
         {props.data.map((item, index) => {
           return (
             <div className={style.bruh} key={index}>
